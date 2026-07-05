@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Invoice — Invoice Agent</title>
+    <meta name="description" content="Upload a PDF or image invoice for AI-powered extraction and validation.">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <a href="/upload" class="logo">
+                    <div class="logo-icon">🧾</div>
+                    Invoice Agent
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Navigation</div>
+                <ul class="nav-links">
+                    <li class="nav-item active">
+                        <a href="/upload"><span class="nav-icon">📤</span> Upload Invoice</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/history"><span class="nav-icon">📋</span> History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/analytics"><span class="nav-icon">📊</span> Analytics</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="user-card">
+                    <div class="user-avatar" id="user-avatar">A</div>
+                    <div class="user-info">
+                        <div class="user-name" id="user-name">Admin</div>
+                        <div class="user-role">Invoice Reviewer</div>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logout-btn">🚪 Sign Out</button>
+            </div>
+        </aside>
+
+        <!-- Main -->
+        <main class="main-content">
+            <div class="topbar">
+                <div>
+                    <h1 class="page-title">Upload Invoice</h1>
+                    <p class="page-subtitle">Upload a PDF or image — the configured extraction provider processes it automatically.</p>
+                </div>
+            </div>
+
+            <div class="glass-panel" style="max-width: 720px; margin: 0 auto;">
+                <div class="upload-container" id="drop-zone">
+                    <div class="upload-icon">📁</div>
+                    <p class="upload-text">Drag &amp; drop your invoice here</p>
+                    <p class="upload-subtext">or click anywhere to browse files</p>
+                    <div class="format-chips" style="margin-top: 1rem;">
+                        <span class="format-chip">PDF</span>
+                        <span class="format-chip">PNG</span>
+                        <span class="format-chip">JPG</span>
+                        <span class="format-chip">JPEG</span>
+                        <span class="format-chip">WEBP</span>
+                    </div>
+                    <input type="file" id="file-input" class="file-input" accept=".pdf,.png,.jpg,.jpeg,.webp">
+                </div>
+
+                <div class="loading-wrapper" id="loading-container">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p class="status-text" id="loading-status">Preparing upload…</p>
+                </div>
+            </div>
+
+            <!-- Steps info -->
+            <div style="max-width: 720px; margin: 1.5rem auto 0; display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;">
+                <div class="glass-panel" style="padding: 1.25rem; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🤖</div>
+                    <div style="font-family:'Outfit'; font-weight:600; font-size:0.9rem; margin-bottom:0.25rem;">Configured Extractor</div>
+                    <div style="font-size:0.78rem; color:var(--text-secondary);">Extracts all fields using AI</div>
+                </div>
+                <div class="glass-panel" style="padding: 1.25rem; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛡️</div>
+                    <div style="font-family:'Outfit'; font-weight:600; font-size:0.9rem; margin-bottom:0.25rem;">Auto Validation</div>
+                    <div style="font-size:0.78rem; color:var(--text-secondary);">Rule-based compliance check</div>
+                </div>
+                <div class="glass-panel" style="padding: 1.25rem; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💾</div>
+                    <div style="font-family:'Outfit'; font-weight:600; font-size:0.9rem; margin-bottom:0.25rem;">Stored Securely</div>
+                    <div style="font-size:0.78rem; color:var(--text-secondary);">Saved to your database</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast-container" class="toast">
+        <span id="toast-icon">⚠️</span>
+        <span id="toast-message"></span>
+    </div>
+
+    <script src="/static/script.js" defer></script>
+</body>
+
+</html>

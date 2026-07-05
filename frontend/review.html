@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Extraction — Invoice Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-container">
+
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="/upload" class="logo">
+        <div class="logo-icon">🧾</div>
+        Invoice Agent
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Navigation</div>
+      <ul class="nav-links">
+        <li class="nav-item active">
+          <a href="/upload"><span class="nav-icon">📤</span> Upload Invoice</a>
+        </li>
+        <li class="nav-item">
+          <a href="/history"><span class="nav-icon">📋</span> History</a>
+        </li>
+        <li class="nav-item">
+          <a href="/analytics"><span class="nav-icon">📊</span> Analytics</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <div class="user-avatar" id="user-avatar">A</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">Admin</div>
+          <div class="user-role">Invoice Reviewer</div>
+        </div>
+      </div>
+      <button class="btn-logout" id="logout-btn">🚪 Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div>
+        <h1 class="page-title">Review Extraction</h1>
+        <p class="page-subtitle">Verify the AI-extracted data and correct any errors before saving.</p>
+      </div>
+      <div class="topbar-actions">
+        <a href="/upload" class="btn btn-secondary btn-sm">← New Upload</a>
+      </div>
+    </div>
+
+    <div class="split-layout">
+      <!-- Left: Document Preview -->
+      <div class="preview-pane">
+        <div class="pane-header">
+          <span>📄 Original Document</span>
+          <span id="preview-filename" style="color:var(--text-muted); font-size:0.78rem; max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+        </div>
+        <div class="preview-viewport" id="preview-viewport">
+          <div class="preview-fallback">No document to preview.</div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div>
+        <!-- Validation Panel -->
+        <div class="glass-panel validation-panel" id="validation-panel">
+          <div class="validation-header">
+            <h3 class="section-heading" style="margin:0; border:none; padding:0;">🛡️ Validation Status</h3>
+            <span id="validation-badge" class="status-badge">Checking…</span>
+          </div>
+          <div class="flags-list" id="flags-list"></div>
+        </div>
+
+        <!-- Invoice Form -->
+        <form id="review-form" class="glass-panel animate-in">
+          <div class="section-heading">📋 Invoice Metadata</div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="vendor-name">Vendor Name *</label>
+              <input type="text" id="vendor-name" placeholder="e.g. ACME Corp" required>
+            </div>
+            <div class="form-group">
+              <label for="invoice-number">Invoice Number *</label>
+              <input type="text" id="invoice-number" placeholder="e.g. INV-2024-001" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="invoice-date">Invoice Date</label>
+              <input type="date" id="invoice-date">
+            </div>
+            <div class="form-group">
+              <label for="due-date">Due Date</label>
+              <input type="date" id="due-date">
+            </div>
+          </div>
+
+          <hr class="divider">
+          <div class="section-heading">📦 Line Items</div>
+
+          <div class="line-items-wrapper">
+            <div class="line-items-header">
+              <span style="font-size:0.82rem; color:var(--text-secondary);">Edit individual line items below</span>
+              <button type="button" class="btn btn-secondary btn-sm" id="add-item-btn">+ Add Row</button>
+            </div>
+            <div class="items-table-container">
+              <table class="items-table">
+                <thead>
+                  <tr>
+                    <th style="width:42%">Description</th>
+                    <th style="width:13%; text-align:right">Qty</th>
+                    <th style="width:18%; text-align:right">Unit Price</th>
+                    <th style="width:18%; text-align:right">Amount</th>
+                    <th style="width:9%"></th>
+                  </tr>
+                </thead>
+                <tbody id="line-items-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <hr class="divider">
+          <div class="section-heading">💰 Financial Totals</div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="subtotal">Subtotal ($)</label>
+              <input type="number" id="subtotal" step="0.01" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="tax">Tax ($)</label>
+              <input type="number" id="tax" step="0.01" placeholder="0.00">
+            </div>
+            <div class="form-group">
+              <label for="total">Total * ($)</label>
+              <input type="number" id="total" step="0.01" placeholder="0.00" required>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button type="button" class="btn btn-secondary" id="discard-btn">Discard</button>
+            <button type="submit" class="btn btn-primary" id="save-btn">✅ Approve &amp; Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container" class="toast">
+  <span id="toast-icon">⚠️</span>
+  <span id="toast-message"></span>
+</div>
+
+<script src="/static/script.js" defer></script>
+</body>
+</html>

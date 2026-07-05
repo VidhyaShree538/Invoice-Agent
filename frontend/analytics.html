@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics — Invoice Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="app-container">
+
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="/upload" class="logo">
+        <div class="logo-icon">🧾</div>
+        Invoice Agent
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Navigation</div>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="/upload"><span class="nav-icon">📤</span> Upload Invoice</a>
+        </li>
+        <li class="nav-item">
+          <a href="/history"><span class="nav-icon">📋</span> History</a>
+        </li>
+        <li class="nav-item active">
+          <a href="/analytics"><span class="nav-icon">📊</span> Analytics</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <div class="user-avatar" id="user-avatar">A</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">Admin</div>
+          <div class="user-role">Invoice Reviewer</div>
+        </div>
+      </div>
+      <button class="btn-logout" id="logout-btn">🚪 Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div>
+        <h1 class="page-title">Analytics Dashboard</h1>
+        <p class="page-subtitle">Spending trends, vendor breakdown, and validation status at a glance.</p>
+      </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="metrics-summary">
+      <div class="glass-panel metric-card">
+        <span class="metric-label">Total Spend</span>
+        <span class="metric-value" id="kpi-total-spend" style="background:linear-gradient(135deg,#fff 30%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">$0</span>
+        <span class="metric-sub">Across all invoices</span>
+      </div>
+      <div class="glass-panel metric-card">
+        <span class="metric-label">Total Invoices</span>
+        <span class="metric-value" id="kpi-total-count">0</span>
+        <span class="metric-sub">Processed to date</span>
+      </div>
+      <div class="glass-panel metric-card success-card">
+        <span class="metric-label">Approved</span>
+        <span class="metric-value" id="kpi-approved-count" style="background:linear-gradient(135deg,#fff 30%,#10b981 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</span>
+        <span class="metric-sub">Passed all checks</span>
+      </div>
+      <div class="glass-panel metric-card danger-card">
+        <span class="metric-label">Needs Review</span>
+        <span class="metric-value" id="kpi-review-count" style="background:linear-gradient(135deg,#fff 30%,#f43f5e 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">0</span>
+        <span class="metric-sub">Flagged by validation</span>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="analytics-grid">
+      <div class="glass-panel chart-card">
+        <div class="chart-title">💰 Total Spend by Vendor</div>
+        <div class="chart-container" style="height:280px;">
+          <canvas id="vendorSpendChart"></canvas>
+        </div>
+      </div>
+      <div class="glass-panel chart-card">
+        <div class="chart-title">📊 Invoice Status Split</div>
+        <div class="chart-container" style="height:280px;">
+          <canvas id="statusCountsChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container" class="toast">
+  <span id="toast-icon">⚠️</span>
+  <span id="toast-message"></span>
+</div>
+
+<script src="/static/script.js" defer></script>
+</body>
+</html>

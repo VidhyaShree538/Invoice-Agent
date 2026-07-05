@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Detail — Invoice Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-container">
+
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="/upload" class="logo">
+        <div class="logo-icon">🧾</div>
+        Invoice Agent
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Navigation</div>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="/upload"><span class="nav-icon">📤</span> Upload Invoice</a>
+        </li>
+        <li class="nav-item active">
+          <a href="/history"><span class="nav-icon">📋</span> History</a>
+        </li>
+        <li class="nav-item">
+          <a href="/analytics"><span class="nav-icon">📊</span> Analytics</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <div class="user-avatar" id="user-avatar">A</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">Admin</div>
+          <div class="user-role">Invoice Reviewer</div>
+        </div>
+      </div>
+      <button class="btn-logout" id="logout-btn">🚪 Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div>
+        <h1 class="page-title">Invoice Detail</h1>
+        <p class="page-subtitle" id="detail-subtitle">Loading invoice…</p>
+      </div>
+      <div class="topbar-actions">
+        <a href="/history" class="btn btn-secondary btn-sm">← Back to History</a>
+      </div>
+    </div>
+
+    <div class="split-layout">
+      <!-- Left: File Preview -->
+      <div class="preview-pane">
+        <div class="pane-header">
+          <span>📄 Source Document</span>
+          <span id="detail-filename" style="color:var(--text-muted); font-size:0.78rem; max-width:160px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;"></span>
+        </div>
+        <div class="preview-viewport" id="detail-viewport">
+          <div class="preview-fallback">Loading document…</div>
+        </div>
+      </div>
+
+      <!-- Right: Info -->
+      <div>
+        <!-- Validation Summary -->
+        <div class="glass-panel validation-panel" id="detail-validation-panel">
+          <div class="validation-header">
+            <h3 class="section-heading" style="margin:0; border:none; padding:0;">🛡️ Validation Result</h3>
+            <span id="detail-validation-badge" class="status-badge">…</span>
+          </div>
+          <div class="flags-list" id="detail-flags-list"></div>
+        </div>
+
+        <!-- Metadata Card -->
+        <div class="glass-panel animate-in" style="margin-top:1.25rem;">
+          <div class="section-heading">📋 Invoice Summary</div>
+
+          <div class="invoice-summary-details">
+            <div class="summary-group">
+              <div class="summary-label">Vendor</div>
+              <div class="summary-value" id="detail-vendor-name">—</div>
+            </div>
+            <div class="summary-group">
+              <div class="summary-label">Invoice Number</div>
+              <div class="summary-value" id="detail-invoice-number">—</div>
+            </div>
+            <div class="summary-group">
+              <div class="summary-label">Invoice Date</div>
+              <div class="summary-value" id="detail-invoice-date">—</div>
+            </div>
+            <div class="summary-group">
+              <div class="summary-label">Due Date</div>
+              <div class="summary-value" id="detail-due-date">—</div>
+            </div>
+            <div class="summary-group">
+              <div class="summary-label">Database ID</div>
+              <div class="summary-value" id="detail-db-id">—</div>
+            </div>
+            <div class="summary-group">
+              <div class="summary-label">Processed At</div>
+              <div class="summary-value" id="detail-processed-at">—</div>
+            </div>
+          </div>
+
+          <hr class="divider">
+          <div class="section-heading" style="margin-bottom:0.75rem;">📦 Line Items</div>
+
+          <div class="items-table-container">
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th style="text-align:right; width:12%">Qty</th>
+                  <th style="text-align:right; width:18%">Unit Price</th>
+                  <th style="text-align:right; width:18%">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="detail-line-items-body"></tbody>
+            </table>
+          </div>
+
+          <div class="financials-summary">
+            <div class="financial-row">
+              <span class="label">Subtotal</span>
+              <span id="detail-subtotal">$0.00</span>
+            </div>
+            <div class="financial-row">
+              <span class="label">Tax</span>
+              <span id="detail-tax">$0.00</span>
+            </div>
+            <div class="financial-row total">
+              <span>Total</span>
+              <span id="detail-total">$0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container" class="toast">
+  <span id="toast-icon">⚠️</span>
+  <span id="toast-message"></span>
+</div>
+
+<script src="/static/script.js" defer></script>
+</body>
+</html>

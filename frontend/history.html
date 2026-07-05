@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice History — Invoice Agent</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app-container">
+
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="/upload" class="logo">
+        <div class="logo-icon">🧾</div>
+        Invoice Agent
+      </a>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Navigation</div>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a href="/upload"><span class="nav-icon">📤</span> Upload Invoice</a>
+        </li>
+        <li class="nav-item active">
+          <a href="/history"><span class="nav-icon">📋</span> History</a>
+        </li>
+        <li class="nav-item">
+          <a href="/analytics"><span class="nav-icon">📊</span> Analytics</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="user-card">
+        <div class="user-avatar" id="user-avatar">A</div>
+        <div class="user-info">
+          <div class="user-name" id="user-name">Admin</div>
+          <div class="user-role">Invoice Reviewer</div>
+        </div>
+      </div>
+      <button class="btn-logout" id="logout-btn">🚪 Sign Out</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div>
+        <h1 class="page-title">Invoice History</h1>
+        <p class="page-subtitle">Browse and search through all processed and approved invoices.</p>
+      </div>
+      <div class="topbar-actions">
+        <a href="/upload" class="btn btn-primary btn-sm">+ New Upload</a>
+      </div>
+    </div>
+
+    <div class="glass-panel">
+      <div class="history-controls">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="history-search" class="search-input" placeholder="Search vendor or invoice number…">
+        </div>
+        <span id="invoice-count-summary" style="color:var(--text-muted); font-size:0.82rem;">Loading…</span>
+      </div>
+
+      <div class="history-table-container">
+        <table class="history-table" id="history-table">
+          <thead>
+            <tr>
+              <th>Processed</th>
+              <th>Vendor</th>
+              <th>Invoice #</th>
+              <th>Invoice Date</th>
+              <th style="text-align:right">Total</th>
+              <th style="text-align:center">Status</th>
+              <th style="width:70px"></th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <tr>
+              <td colspan="7">
+                <div class="empty-state">
+                  <div class="empty-state-icon">⏳</div>
+                  <div class="empty-state-title">Loading history…</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div id="toast-container" class="toast">
+  <span id="toast-icon">⚠️</span>
+  <span id="toast-message"></span>
+</div>
+
+<script src="/static/script.js" defer></script>
+</body>
+</html>
